@@ -46,7 +46,7 @@ namespace AdministracionEmpresa
         }
         public int AniosParaJubilacion()
         {
-            int edad = CalculoEdad();
+            int edad = Edad();
             int aniosRestantes = 65 - edad;
             return aniosRestantes; 
         }
@@ -54,9 +54,9 @@ namespace AdministracionEmpresa
         public double Salario()
         {
             double Adicional;
-            if(CalculoAntiguedad()< 20)
+            if(Antiguedad()< 20)
             {
-                Adicional = SueldoBasico * (CalculoAntiguedad()/100);
+                Adicional = SueldoBasico * (Antiguedad()/100);
             }else
             {
                 Adicional = SueldoBasico * 0.25;
@@ -69,7 +69,7 @@ namespace AdministracionEmpresa
             {
                 Adicional = Adicional+ 150000;
             }
-            double alario= sueldoBasico+ Adicional;
+            double salario= sueldoBasico+ Adicional;
             return salario;
         }
     }

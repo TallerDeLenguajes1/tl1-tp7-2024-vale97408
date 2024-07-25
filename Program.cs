@@ -1,8 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using EspacioCalculadora;
+using AdministracionEmpresa; 
 
-        Calculadora miCalculadora = new Calculadora();
+Calculadora miCalculadora = new Calculadora();
 
         int control;
         Console.WriteLine("\n=============CALCULADORA===============\n");
@@ -80,7 +81,7 @@ using EspacioCalculadora;
 Console.WriteLine("\n=============EJERCICIO 2===============\n");
  
 
-Empleado[] Empleados = new Empleado[3];
+Empleados[] Empleados = new Empleados[3];
 
 char estadoC;
 string ingresa;
@@ -91,7 +92,7 @@ int cargoDelEmpleado;
 
 for (int i = 0; i < 3; i++)
 {
-    Empleados[i] = new Empleado();
+    Empleados[i] = new Empleados();
 
     Console.WriteLine($"\n======Empleado NRO {i+1}======\n");
     Console.WriteLine("Nombre del empleado:\n");
@@ -104,33 +105,33 @@ for (int i = 0; i < 3; i++)
     do
     {
         Console.WriteLine("\nFormato AAAA-MM-DD.");
-        ingresado = Console.ReadLine();
-    } while (!DateTime.TryParse(ingresado, out fechaNacim));
-    Empleados[i].FechaNac = fechaNacim;
+        ingresa = Console.ReadLine();
+    } while (!DateTime.TryParse(ingresa, out fechaNacim));
+    Empleados[i].FechaNacimiento = fechaNacim;
 
     do
     {
         Console.WriteLine("Estado civil del empleado:\n");
         Console.WriteLine("[c]. Casado\n");
         Console.WriteLine("[s]. Soltero\n");
-        ingresado = Console.ReadLine();
+        ingresa = Console.ReadLine();
         
-    } while (!char.TryParse(ingresado, out estado) || (estado != 'c' && estado != 's' && estado != 'C' && estado != 'S'));
-    Empleados[i].EstadoCivil = estado;
+    } while (!char.TryParse(ingresa, out estadoC) || (estadoC != 'c' && estadoC != 's' && estadoC != 'C' && estadoC != 'S'));
+    Empleados[i].EstadoCivil = estadoC;
 
     Console.WriteLine("Fecha de ingreso en la empresa del empleado:\n");
     do
     {
         Console.WriteLine("\nFormato AAAA-MM-DD.");
-        ingresado = Console.ReadLine();
-    } while (!DateTime.TryParse(ingresado, out fechaIng));
+        ingresa = Console.ReadLine();
+    } while (!DateTime.TryParse(ingresa, out fechaIng));
     Empleados[i].FechaIngreso = fechaIng;
     
     do
     {
         Console.WriteLine("Sueldo basico del empleado:\n");
-        ingresado = Console.ReadLine();
-    } while (!double.TryParse(ingresado, out sueldoBasic) || sueldoBasic < 0);
+        ingresa = Console.ReadLine();
+    } while (!double.TryParse(ingresa, out sueldoBasic) || sueldoBasic < 0);
     Empleados[i].SueldoBasico = sueldoBasic;
 
     do
@@ -141,8 +142,8 @@ for (int i = 0; i < 3; i++)
         Console.WriteLine("[3]. Ingeniero\n");
         Console.WriteLine("[4]. Especialista\n");
         Console.WriteLine("[5]. Investigador\n");
-        ingresado = Console.ReadLine();
-    } while (!int.TryParse(ingresado, out cargoDelEmpleado) || cargoDelEmpleado >= 6 || cargoDelEmpleado <= 0);
+        ingresa = Console.ReadLine();
+    } while (!int.TryParse(ingresa, out cargoDelEmpleado) || cargoDelEmpleado >= 6 || cargoDelEmpleado <= 0);
 
     switch (cargoDelEmpleado)
     {
@@ -168,16 +169,16 @@ for (int i = 0; i < 3; i++)
 double totalSalarios = 0;
 for (int i = 0; i < 3; i++)
 {
-    totalSalarios = totalSalarios + Empleados[i].salario();
+    totalSalarios = totalSalarios + Empleados[i].Salario();
 }
 Console.WriteLine($"---El total pagado en concepto de salarios es: ${totalSalarios}\n");
 
 int menos = 65;
 for (int i = 0; i < 3; i++)
 {
-    if (Empleados[i].aniosFaltantesJubilarse() <= menos)
+    if (Empleados[i].AniosParaJubilacion() <= menos)
     {
-        menos = Empleados[i].aniosFaltantesJubilarse();
+        menos = Empleados[i].AniosParaJubilacion();
     }
 }
 
@@ -185,13 +186,13 @@ Console.WriteLine($"---EMPLEADOS PROXIMOS A JUBILARSE:\n");
 
 for (int i = 0; i < 3; i++)
 {
-    int edadEmpleado = Empleados[i].edad();
-    int antiguedadEmpleado = Empleados[i].antiguedad();
-    double salarioEmp = Empleados[i].salario();
-    int aniosFaltantes = Empleados[i].aniosFaltantesJubilarse();
+    int edadEmpleado = Empleados[i].Edad();
+    int antiguedadEmpleado = Empleados[i].Antiguedad();
+    double salarioEmp = Empleados[i].Salario();
+    int aniosFaltantes = Empleados[i].AniosParaJubilacion();
     string fechaIngreso = Empleados[i].FechaIngreso.ToShortDateString();
-    string fechaNacEmp = Empleados[i].FechaNac.ToShortDateString();
-    if (Empleados[i].aniosFaltantesJubilarse() == menos)
+    string fechaNacEmp = Empleados[i].FechaNacimiento.ToShortDateString();
+    if (Empleados[i].AniosParaJubilacion() == menos)
     {
         Console.WriteLine($"\n------EMPLEADO NRO {i+1}------\n");
         Console.WriteLine($"--Apellido: {Empleados[i].Apellido}\n");
